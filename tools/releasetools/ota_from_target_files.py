@@ -632,16 +632,15 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
 
   system_progress = 0.75
 
-  script.Print("******************************************************");
-  script.Print(" _________  ________   ______   _____          _     ");  
-  script.Print("|  _   _  ||_   __  |.' ____ \ |_   _|        / \    ");  
-  script.Print("|_/ | | \_|  | |_ \_|| (___ \_|  | |         / _ \    "); 
-  script.Print("    | |      |  _| _  _.____`.   | |   _    / ___ \    ");
-  script.Print("   _| |_    _| |__/ || \____) | _| |__/ | _/ /   \ \_  ");
-  script.Print("  |_____|  |________| \______.'|________||____| |____| ");
-  script.Print("                   AOSP Marshmallow                    "); 
-  script.Print("              A Ground Zero Roms Project           ");
-  script.Print("******************************************************"); 
+  script.Print("************************************");
+  script.Print("           _____       _                           "); 
+  script.Print("          |_   _|__ __| |__ _                    "); 
+  script.Print("            | |/ -_|_-< / _` |                    "); 
+  script.Print("            |_|\___/__/_\__,_|                   "); 
+  script.Print("                                                      "); 
+  script.Print("              AOSP Nougat                    "); 
+  script.Print("   A Ground Zero Roms Project         ");
+  script.Print("************************************"); 
 
   if OPTIONS.wipe_user_data:
     system_progress -= 0.1
@@ -731,13 +730,6 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     script.RunBackup("restore")
     if block_based:
       script.Unmount("/system")
-
-    script.Print("Flashing SuperSU...")
-    common.ZipWriteStr(output_zip, "supersu/supersu.zip",
-                   ""+input_zip.read("SYSTEM/addon.d/UPDATE-SuperSU.zip"))
-    script.Mount("/system")
-    # No SuperSU yet for N
-    #script.FlashSuperSU()
 
   script.ShowProgress(0.05, 5)
   script.WriteRawImage("/boot", "boot.img")
@@ -1695,11 +1687,9 @@ def main(argv):
   # also apply the labels in our new image. During building, the "file_contexts"
   # is in the out/ directory tree, but for repacking from target-files.zip it's
   # in the root directory of the ramdisk.
-
-  ## Disable this for now
-  #if "selinux_fc" in OPTIONS.info_dict:
-  #  OPTIONS.info_dict["selinux_fc"] = os.path.join(
-  #      OPTIONS.input_tmp, "BOOT", "RAMDISK", "file_contexts")
+#  if "selinux_fc" in OPTIONS.info_dict:
+#    OPTIONS.info_dict["selinux_fc"] = os.path.join(
+#        OPTIONS.input_tmp, "BOOT", "RAMDISK", "file_contexts")
 
   if OPTIONS.verbose:
     print("--- target info ---")
